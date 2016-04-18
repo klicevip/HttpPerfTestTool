@@ -1,0 +1,13 @@
+*.pdb
+*.suo
+*.user
+.vs
+bin
+obj
+.svn
+*.log
+
+
+logs
+*.pubxml
+srouce/product
