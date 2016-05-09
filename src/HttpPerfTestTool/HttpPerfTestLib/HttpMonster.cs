@@ -38,7 +38,6 @@ namespace HttpPerfTestLib
 
         int _userCount;
 
-        LocalDataStoreSlot _httpClientSlot;
         public HttpMonster(ILog log)
         {
             _log = log;
@@ -67,12 +66,12 @@ namespace HttpPerfTestLib
             int processorCount = Environment.ProcessorCount;
 
             _tasks = new List<Task>();
-            for (int i = 0; i < processorCount * 2; i++)
+            for (int i = 0; i < processorCount * 1; i++)
             {
                 _tasks.Add(Task.Factory.StartNew(Run));
             }
             _startTime = DateTime.Now;
-            _log.Info("started {0} {1} {2}", method, url, data);
+            _log.Info("started {0} {1} {2}， {3} tasks", method, url, data, _tasks.Count);
         }
 
         public void LogState()
@@ -119,7 +118,7 @@ namespace HttpPerfTestLib
             int userCountPerTask = _userCount / _tasks.Count;
             for (int i = 0; i < userCountPerTask; i++)
             {
-                WithWebRequest();
+                WithHttpClient();
             }
         }
 
